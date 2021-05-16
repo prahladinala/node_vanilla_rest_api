@@ -13,8 +13,13 @@ const server = http.createServer((req, res) => {
     // res.write(JSON.stringify(products))
     // res.end()
 
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(products))
+    if (req.url === '/api/products') {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(products))
+    } else {
+        res.writeHead(404, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ message: "Route not Found" }))
+    }
 })
 
 const PORT = process.env.PORT || 5000
